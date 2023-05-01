@@ -47,7 +47,7 @@ const profileRouter = {
       name: "Profile",
       meta: {
         title: "个人信息",
-        roles: ["admin", "applicant"]
+        roles: ["applicant"]
       }
     }
   ]
@@ -62,19 +62,19 @@ const applicationRouter = {
   },
   children: [
     {
-      path: "/application/progress/index",
-      name: "ApplicationProgress",
-      meta: {
-        title: "申请进度",
-        roles: ["admin", "applicant"]
-      }
-    },
-    {
       path: "/application/new/index",
       name: "ApplicationNew",
       meta: {
         title: "新的申请",
-        roles: ["admin", "applicant"]
+        roles: ["applicant"]
+      }
+    },
+    {
+      path: "/application/progress/index",
+      name: "ApplicationProgress",
+      meta: {
+        title: "申请进度",
+        roles: ["applicant"]
       }
     },
     {
@@ -82,7 +82,7 @@ const applicationRouter = {
       name: "ApplicationManage",
       meta: {
         title: "申请管理",
-        roles: ["admin", "applicant"]
+        roles: ["admin"]
       }
     }
   ]
@@ -101,7 +101,7 @@ const faqsRouter = {
       name: "Faqs",
       meta: {
         title: "常见问题",
-        roles: ["admin", "applicant"]
+        roles: ["applicant"]
       }
     }
   ]

@@ -10,7 +10,7 @@ import { MotionPlugin } from "@vueuse/motion";
 import { injectResponsiveStorage } from "@/utils/responsive";
 
 // import Table from "@pureadmin/table";
-// import PureDescriptions from "@pureadmin/descriptions";
+import PureDescriptions from "@pureadmin/descriptions";
 
 // 引入重置样式
 import "./style/reset.scss";
@@ -50,9 +50,9 @@ getServerConfig(app).then(async config => {
   await router.isReady();
   injectResponsiveStorage(app, config);
   setupStore(app);
-  app.use(MotionPlugin).use(useI18n).use(ElementPlus);
+  app.use(MotionPlugin).use(useI18n).use(ElementPlus).use(PureDescriptions);
   // .use(useEcharts);
   // .use(Table);
-  // .use(PureDescriptions);
+  // ;
   app.mount("#app");
 });

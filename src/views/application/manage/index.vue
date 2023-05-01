@@ -1,10 +1,177 @@
 <script setup lang="ts">
+import { ref } from "vue";
+import { useRole } from "./hook";
+import { PureTableBar } from "@/components/RePureTableBar";
+import { PureTable } from "@pureadmin/table";
+import { useRenderIcon } from "@/components/ReIcon/src/hooks";
+
+import Database from "@iconify-icons/ri/database-2-line";
+import More from "@iconify-icons/ep/more-filled";
+import Delete from "@iconify-icons/ep/delete";
+import EditPen from "@iconify-icons/ep/edit-pen";
+import Search from "@iconify-icons/ep/search";
+import Refresh from "@iconify-icons/ep/refresh";
+import Menu from "@iconify-icons/ep/menu";
+
 defineOptions({
-  // name 作为一种规范最好必须写上并且和路由的name保持一致
   name: "ApplicationManage"
 });
+
+const formRef = ref();
+const {
+  form,
+  loading,
+  columns,
+  dataList,
+  pagination,
+  buttonClass,
+  onSearch,
+  resetForm,
+  handleUpdate,
+  handleDelete,
+  handleSizeChange,
+  handleCurrentChange,
+  handleSelectionChange
+} = useRole();
 </script>
 
 <template>
-  <h1>申请管理</h1>
+  <div class="main">
+    <el-form
+      ref="formRef"
+      :inline="true"
+      :model="form"
+      class="bg-bg_color w-[99/100] pl-8 pt-4"
+    >
+      <el-form-item label="申请人名字：" prop="name">
+        <el-input
+          v-model="form.name"
+          placeholder="请输入申请人名字"
+          clearable
+          class="!w-[200px]"
+        />
+      </el-form-item>
+      <el-form-item label="状态：" prop="status">
+        <el-select
+          v-model="form.status"
+          placeholder="请选择状态"
+          clearable
+          class="!w-[180px]"
+        >
+          <el-option label="已拒绝" value="0" />
+          <el-option label="已申请" value="1" />
+          <el-option label="已初审" value="2" />
+          <el-option label="已面试" value="3" />
+          <el-option label="已录取" value="4" />
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button
+          type="primary"
+          :icon="useRenderIcon(Search)"
+          :loading="loading"
+          @click="onSearch"
+        >
+          搜索
+        </el-button>
+        <el-button :icon="useRenderIcon(Refresh)" @click="resetForm(formRef)">
+          重置
+        </el-button>
+      </el-form-item>
+    </el-form>
+
+    <PureTableBar title="申请列表" @refresh="onSearch">
+      <template v-slot="{ size, checkList }">
+        <pure-table
+          border
+          align-whole="center"
+          showOverflowTooltip
+          table-layout="auto"
+          :loading="loading"
+          :size="size"
+          :data="dataList"
+          :columns="columns"
+          :checkList="checkList"
+          :pagination="pagination"
+          :paginationSmall="size === 'small' ? true : false"
+          :header-cell-style="{
+            background: 'var(--el-table-row-hover-bg-color)',
+            color: 'var(--el-text-color-primary)'
+          }"
+          @selection-change="handleSelectionChange"
+          @page-size-change="handleSizeChange"
+          @page-current-change="handleCurrentChange"
+        >
+          <template #operation="{ row }">
+            <el-button
+              class="reset-margin"
+              link
+              type="primary"
+              :size="size"
+              :icon="useRenderIcon(EditPen)"
+              @click="handleUpdate(row)"
+            >
+              编辑
+            </el-button>
+            <el-popconfirm title="是否确认删除?">
+              <template #reference>
+                <el-button
+                  class="reset-margin"
+                  link
+                  type="primary"
+                  :size="size"
+                  :icon="useRenderIcon(Delete)"
+                  @click="handleDelete(row)"
+                >
+                  删除
+                </el-button>
+              </template>
+            </el-popconfirm>
+            <el-dropdown>
+              <el-button
+                class="ml-3 mt-[2px]"
+                link
+                type="primary"
+                :size="size"
+                :icon="useRenderIcon(More)"
+                @click="handleUpdate(row)"
+              />
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item>
+                    <el-button
+                      :class="buttonClass"
+                      link
+                      type="primary"
+                      :size="size"
+                      :icon="useRenderIcon(Menu)"
+                    >
+                      给申请人发消息
+                    </el-button>
+                  </el-dropdown-item>
+                  <el-dropdown-item>
+                    <el-button
+                      :class="buttonClass"
+                      link
+                      type="primary"
+                      :size="size"
+                      :icon="useRenderIcon(Database)"
+                    >
+                      拉黑此人
+                    </el-button>
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </template>
+        </pure-table>
+      </template>
+    </PureTableBar>
+  </div>
 </template>
+
+<style scoped lang="scss">
+:deep(.el-dropdown-menu__item i) {
+  margin: 0;
+}
+</style>

@@ -47,7 +47,7 @@
   font: bold 200% Consolas, Monaco, monospace;
 }
 
-@media screen and (max-width: 1180px) {
+@media screen and (max-width: 10000px) {
   .login-container {
     grid-gap: 9rem;
   }
@@ -71,7 +71,7 @@
   }
 }
 
-@media screen and (max-width: 968px) {
+@media screen and (max-width: 10000px) {
   .wave {
     display: none;
   }

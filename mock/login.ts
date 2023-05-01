@@ -6,15 +6,15 @@ export default [
     url: "/login",
     method: "post",
     response: ({ body }) => {
-      if (body.username === "admin") {
+      if (body.username === "bob") {
         return {
           success: true,
           data: {
-            username: "admin",
+            username: "bob",
             // 一个用户可能有多个角色
             roles: ["admin"],
-            accessToken: "eyJhbGciOiJIUzUxMiJ9.admin",
-            refreshToken: "eyJhbGciOiJIUzUxMiJ9.adminRefresh",
+            accessToken: "eyJhbGciOiJIUzUxMiJ9.bob",
+            refreshToken: "eyJhbGciOiJIUzUxMiJ9.bobRefresh",
             expires: "2023/10/30 00:00:00"
           }
         };
@@ -22,11 +22,11 @@ export default [
         return {
           success: true,
           data: {
-            username: "common",
+            username: "alice",
             // 一个用户可能有多个角色
-            roles: ["common"],
-            accessToken: "eyJhbGciOiJIUzUxMiJ9.common",
-            refreshToken: "eyJhbGciOiJIUzUxMiJ9.commonRefresh",
+            roles: ["applicant"],
+            accessToken: "eyJhbGciOiJIUzUxMiJ9.alice",
+            refreshToken: "eyJhbGciOiJIUzUxMiJ9.aliceRefresh",
             expires: "2023/10/30 00:00:00"
           }
         };

@@ -30,7 +30,7 @@ menus:
   hsfourZeroOne: "403"
   hsFive: "500"
   permission: Permission Manage
-  permissionPage: Page Permission
+  permissionPage: Switch Permission
   permissionButton: Button Permission
 status:
   hsLoad: Loading...

@@ -81,6 +81,9 @@ devDependencies:
   "@iconify-icons/ep":
     specifier: ^1.2.10
     version: 1.2.10
+  "@iconify-icons/ph":
+    specifier: ^1.2.4
+    version: 1.2.4
   "@iconify-icons/ri":
     specifier: ^1.2.4
     version: 1.2.4
@@ -1221,6 +1224,15 @@ packages:
     resolution:
       {
         integrity: sha512-slLhiMM5snJi+Mbzj02UPkK1Ym5SK9U4l1CSbA5V6YGjzL1Pk60fGPB6b7Js3jObftONWji6bpJKFjOGYyPk/g==
+      }
+    dependencies:
+      "@iconify/types": 2.0.0
+    dev: true
+
+  /@iconify-icons/ph@1.2.4:
+    resolution:
+      {
+        integrity: sha512-jYpLrjUg46eNiOJOjYrtipYS+rTc891aQoSP3ic1l130n7Q6sC23z9xQ4tGKeYNL0h7EB/OdMOZrsc+6bCHxBA==
       }
     dependencies:
       "@iconify/types": 2.0.0

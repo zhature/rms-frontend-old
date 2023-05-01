@@ -2,10 +2,110 @@
 import { MockMethod } from "vite-plugin-mock";
 
 /**
- * roles：页面级别权限，这里模拟二种 "admin"、"common"
- * admin：管理员角色
- * common：普通角色
+ * roles：页面级别权限，这里模拟二种 "admin"、"applicant"
+ * admin：招聘官
+ * applicant：申请人
  */
+
+const informationRouter = {
+  path: "/information",
+  meta: {
+    title: "岗位介绍",
+    icon: "collection",
+    rank: 1
+  },
+  children: [
+    {
+      path: "/information/manage",
+      name: "InformationManage",
+      meta: {
+        title: "岗位介绍",
+        roles: ["admin"]
+      }
+    },
+    {
+      path: "/information/view",
+      name: "InformationView",
+      meta: {
+        title: "岗位介绍",
+        roles: ["applicant"]
+      }
+    }
+  ]
+};
+
+const profileRouter = {
+  path: "/profile",
+  meta: {
+    title: "个人信息",
+    icon: "avatar",
+    rank: 2
+  },
+  children: [
+    {
+      path: "/profile/index",
+      name: "Profile",
+      meta: {
+        title: "个人信息",
+        roles: ["admin", "applicant"]
+      }
+    }
+  ]
+};
+
+const applicationRouter = {
+  path: "/application",
+  meta: {
+    title: "职位申请",
+    icon: "document-copy",
+    rank: 3
+  },
+  children: [
+    {
+      path: "/application/progress/index",
+      name: "ApplicationProgress",
+      meta: {
+        title: "申请进度",
+        roles: ["admin", "applicant"]
+      }
+    },
+    {
+      path: "/application/new/index",
+      name: "ApplicationNew",
+      meta: {
+        title: "新的申请",
+        roles: ["admin", "applicant"]
+      }
+    },
+    {
+      path: "/application/manage/index",
+      name: "ApplicationManage",
+      meta: {
+        title: "申请管理",
+        roles: ["admin", "applicant"]
+      }
+    }
+  ]
+};
+
+const faqsRouter = {
+  path: "/faqs",
+  meta: {
+    title: "常见问题",
+    icon: "question",
+    rank: 4
+  },
+  children: [
+    {
+      path: "/faqs/index",
+      name: "Faqs",
+      meta: {
+        title: "常见问题",
+        roles: ["admin", "applicant"]
+      }
+    }
+  ]
+};
 
 const permissionRouter = {
   path: "/permission",
@@ -16,20 +116,11 @@ const permissionRouter = {
   },
   children: [
     {
-      path: "/permission/page/index",
+      path: "/permission/index",
       name: "PermissionPage",
       meta: {
         title: "menus.permissionPage",
-        roles: ["admin", "common"]
-      }
-    },
-    {
-      path: "/permission/button/index",
-      name: "PermissionButton",
-      meta: {
-        title: "menus.permissionButton",
-        roles: ["admin", "common"],
-        auths: ["btn_add", "btn_edit", "btn_delete"]
+        roles: ["admin", "applicant"]
       }
     }
   ]
@@ -42,7 +133,13 @@ export default [
     response: () => {
       return {
         success: true,
-        data: [permissionRouter]
+        data: [
+          permissionRouter,
+          informationRouter,
+          profileRouter,
+          applicationRouter,
+          faqsRouter
+        ]
       };
     }
   }

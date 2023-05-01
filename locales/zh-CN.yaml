@@ -30,7 +30,7 @@ menus:
   hsfourZeroOne: "403"
   hsFive: "500"
   permission: 权限管理
-  permissionPage: 页面权限
+  permissionPage: 角色切换
   permissionButton: 按钮权限
 status:
   hsLoad: 加载中...

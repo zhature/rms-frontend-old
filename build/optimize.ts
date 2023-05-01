@@ -26,6 +26,7 @@ const include = [
 const exclude = [
   "@iconify-icons/ep",
   "@iconify-icons/ri",
+  "@iconify-icons/ph",
   "@pureadmin/theme/dist/browser-utils"
 ];
 
